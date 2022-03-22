@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.mapper.FileMapper">
+
+
+    <resultMap id="fresult" type="com.hr.po.FileInfo">
+        <result property="id" column="id"></result>
+        <result property="originalFileName" column="originalFileName"></result>
+        <result property="realFileName" column="realFileName"></result>
+        <result property="createTime" column="createTime"></result>
+        <result property="ablatePath" column="ablatePath"></result>
+    </resultMap>
+
+    <select id="findByRealFileName" resultMap="fresult" parameterType="string">
+        select * from fileinfo where realfilename=#{filename}
+    </select>
+
+    <select id="getByName" resultType="com.hr.po.FileInfo" parameterType="string">
+        select * from fileinfo where realfilename=#{filename}
+    </select>
+
+    <insert id="save" parameterType="com.hr.po.FileInfo">
+        insert into fileinfo(originalFileName,realFileName,createTime,ablatePath)
+              values(#{originalFileName},#{realFileName},NOW(),#{ablatePath})
+    </insert>
+
+
+</mapper>
